@@ -1,3 +1,4 @@
+
 import os
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
@@ -42,6 +43,7 @@ def load_model():
     vocab_size = tokenizer.get_vocab_size()
     model = NexusNMT(src_vocab_size=vocab_size, tgt_vocab_size=vocab_size).to(device)
     
+    # ✅ Points to the newly uploaded 145MB file
     weights_path = hf_hub_download(repo_id=repo_id, filename="nexus_batch_NEW_8bit.pt", token=hf_token) 
     
     state_dict_8bit = torch.load(weights_path, map_location=device)
